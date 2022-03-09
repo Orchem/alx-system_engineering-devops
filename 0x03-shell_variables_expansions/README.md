@@ -1,1 +1,1 @@
-TO perform various shell variable commands
+To practice shell variables
