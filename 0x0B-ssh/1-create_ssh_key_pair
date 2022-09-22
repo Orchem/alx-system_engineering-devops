@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-# Bash script that creates an RSA key pair.
-ssh-keygen -b 4096 -f holberton -N betty
+# script to create ssh key with passphrase and 4096 bits
+
+ssh-keygen -t rsa -b 4096 -N betty -f school

@@ -1,13 +1,16 @@
-# configuring ssh_config using Puppet
-
-file_line {'Append a line to /etc/ssh/ssh_config':
-  path    => '/etc/ssh/ssh_config',
-  line    => '    IdentityFile ~/.ssh/holberton',
-  replace => true,
-}
+#Your SSH client configuration must be configured to use the private key ~/.ssh/holberton
+#Your SSH client configuration must be configured to refuse to authenticate using a password
 
 file_line {'Turn off passwd auth':
-  path    => '/etc/ssh/ssh_config',
-  line    => '    PasswordAuthentication no',
-  replace => true,
+	ensure => 'present',
+	path   => '/etc/ssh/ssh_config',
+	line   => 'PasswordAuthentication no',
 }
+
+file_line {'Declare identity file':
+	ensure => 'present',
+	path   => '/etc/ssh/ssh_config',
+	line   => 'IdentityFile ~/.ssh/school',
+}
+
+
