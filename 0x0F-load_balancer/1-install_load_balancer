@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# script that installs HAProxy Load Balancer (LB)
+# configures LB to use two servers
+apt-get update
+apt-get -y install --no-install-recommends software-properties-common
+add-apt-repository -y ppa:vbernat/haproxy-2.6
+apt-get -y install haproxy=2.6.\*
+apt-get update
+
+echo "frontend load-balancer
+        bind *:80
+        mode http
+        default_backend web-backend" >> /etc/haproxy/haproxy.cfg
+
+echo "backend web-backend
+        balance roundrobin
+        server 26039-web-01 3.238.254.219:80 check
+        server 26039-web-02 3.236.232.84:80 check" >> /etc/haproxy/haproxy.cfg
+
+service haproxy restart
